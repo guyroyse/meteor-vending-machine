@@ -16,7 +16,7 @@ describe('VendingMachine.Router', function() {
       map : function() {}
     };
 
-    require('../router');
+    require('../source/router');
 
     subject = VendingMachine.Router;
 
