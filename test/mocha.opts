@@ -1,4 +1,5 @@
 tests
 --reporter spec
 --recursive
+--require tests/spec_helper
 
