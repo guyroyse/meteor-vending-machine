@@ -1,2 +1,4 @@
 tests
 --reporter spec
+--recursive
+
