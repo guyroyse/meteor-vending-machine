@@ -1,19 +1,15 @@
-if (Meteor.isClient) {
-  Template.hello.greeting = function () {
-    return "Welcome to MeteorVendingMachine.";
-  };
+Router.configure({
+  layoutTemplate: 'layout',
+  notFoundTemplate: 'welcome'
+});
 
-  Template.hello.events({
-    'click input' : function () {
-      // template data, if any, is available in 'this'
-      if (typeof console !== 'undefined')
-        console.log("You pressed the button");
-    }
+Router.map(function() {
+  this.route('home', { 
+    path: '/',
+    after: function() { document.title = 'Vending Machine | Home'; } 
   });
-}
+  this.route('machine', {
+    after: function() { document.title = 'Vending Machine | Start Vending!'; } 
+  });
+});
 
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
-  });
-}
