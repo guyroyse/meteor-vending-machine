@@ -4,12 +4,20 @@ Router.configure({
 });
 
 Router.map(function() {
-  this.route('home', { 
-    path: '/',
-    after: function() { document.title = 'Vending Machine | Home'; } 
-  });
-  this.route('machine', {
-    after: function() { document.title = 'Vending Machine | Start Vending!'; } 
-  });
+
+  var self = this;
+
+  var titleRoute = function(name, path, title) {
+    self.route(name, {
+      path: path,
+      after: function() {
+        document.title = title;
+      }
+    });
+  };
+
+  titleRoute('home', '/', 'Vending Machine | Home');
+  titleRoute('machine', '/machine', 'Vending Machine | Start Vending');
+
 });
 
