@@ -1,22 +1,18 @@
-describe('VendingMachine.Router', function() {
-
-  require('../source/router');
+describe('Router', function() {
 
   var subject;
 
   before(function() {
-    subject = VendingMachine.Router;
+
     Router = {};
+    Router.configure = sinon.spy();
+    Router.route = sinon.spy();
     Router.map = function(fn) { 
       fn.apply(this); 
     };
-  });
+    
+    require('../source/router');
 
-  beforeEach(function() {
-    Router.configure = sinon.spy();
-    Router.route = sinon.spy();
-
-    subject.start();
   });
 
   it("configures the layoutTemplate as 'layout'", function() {

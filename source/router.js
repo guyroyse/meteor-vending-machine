@@ -1,38 +1,24 @@
-VendingMachine = {};
+Router.configure({
+  layoutTemplate: 'layout',
+  notFoundTemplate: 'welcome'
+});
 
-VendingMachine.Router = (function() {
+Router.map(function() {
 
-  var self = {};
+  var self = this;
 
-  self.start = function() {
-
-    Router.configure({
-      layoutTemplate: 'layout',
-      notFoundTemplate: 'welcome'
+  var titleRoute = function(name, path, title) {
+    self.route(name, {
+      path: path,
+      template: name,
+      after: function() {
+        document.title = title;
+      }
     });
-
-    Router.map(function() {
-
-      var self = this;
-
-      var titleRoute = function(name, path, title) {
-        self.route(name, {
-          path: path,
-          template: name,
-          after: function() {
-            document.title = title;
-          }
-        });
-      };
-
-      titleRoute('welcome', '/', 'Vending Machine | Home');
-      titleRoute('machine', '/machine', 'Vending Machine | Start Vending');
-
-    });
-
   };
 
-  return self;
+  titleRoute('welcome', '/', 'Vending Machine | Home');
+  titleRoute('machine', '/machine', 'Vending Machine | Start Vending');
 
-})();
+});
 
