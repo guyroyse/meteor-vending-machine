@@ -1,45 +1,49 @@
 describe('VendingMachine.Router', function() {
 
-  var subject, mockRouter;
+  require('../source/router');
+
+  var subject;
 
   before(function() {
-
-    Router = {
-      configure : function() {},
-      map : function() {}
-    };
-
-    require('../source/router');
-
     subject = VendingMachine.Router;
-
+    Router = {};
   });
 
   beforeEach(function() {
-    mockRouter = sinon.mock(Router);
+    Router.configure = sinon.spy();
+    Router.route = sinon.spy();
+    Router.map = function(fn) { 
+      fn.apply(this); 
+    };
+
+    subject.start();
   });
 
-  it('calls configure with expected templates', function() {
+  afterEach(function() {
+  });
 
-    mockRouter.expects('configure').once().withExactArgs({
-      layoutTemplate: 'layout',
-      notFoundTemplate: 'welcome'
+  it("configures the layoutTemplate as 'layout'", function() {
+    expect(Router.configure).to.have.been.calledWith(sinon.match.has('layoutTemplate', 'layout'));
+  });
+
+  it("configures the notFoundTemplate as 'welcome'", function() {
+    expect(Router.configure).to.have.been.calledWith(sinon.match.has('notFoundTemplate', 'welcome'));
+  });
+
+  it("maps the 'welcome' route", function() {
+    expect(Router.route).to.have.been.calledWith('welcome', {
+      path: '/',
+      template: 'welcome',
+      after: sinon.match.func
     });
-
-    subject.start();
-
-    mockRouter.verify();
-
   });
 
-  it('maps routes', function() {
-
-    mockRouter.expects('map').once();
-
-    subject.start();
-
-    mockRouter.verify();
-
+  it("maps the 'machine' route", function() {
+    expect(Router.route).to.have.been.calledWith('machine', {
+      path: '/machine',
+      template: 'machine',
+      after: sinon.match.func
+    });
   });
 
 });

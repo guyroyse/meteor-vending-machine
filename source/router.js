@@ -18,13 +18,14 @@ VendingMachine.Router = (function() {
       var titleRoute = function(name, path, title) {
         self.route(name, {
           path: path,
+          template: name,
           after: function() {
             document.title = title;
           }
         });
       };
 
-      titleRoute('home', '/', 'Vending Machine | Home');
+      titleRoute('welcome', '/', 'Vending Machine | Home');
       titleRoute('machine', '/machine', 'Vending Machine | Start Vending');
 
     });
