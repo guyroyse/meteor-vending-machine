@@ -7,19 +7,16 @@ describe('VendingMachine.Router', function() {
   before(function() {
     subject = VendingMachine.Router;
     Router = {};
+    Router.map = function(fn) { 
+      fn.apply(this); 
+    };
   });
 
   beforeEach(function() {
     Router.configure = sinon.spy();
     Router.route = sinon.spy();
-    Router.map = function(fn) { 
-      fn.apply(this); 
-    };
 
     subject.start();
-  });
-
-  afterEach(function() {
   });
 
   it("configures the layoutTemplate as 'layout'", function() {
