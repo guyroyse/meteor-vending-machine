@@ -4,13 +4,8 @@ describe('Template.welcome', function() {
 
   before(function() {
 
-    Meteor = {};
-    Meteor.isClient = true;
-    Template = {};
-    Template.welcome = {};
-    Template.welcome.events = function(events) {
-      this.configuredEvents = events;
-    };
+    FauxMeteor.initAsClient();
+    FauxMeteor.addTemplate('welcome');
 
     Router = {};
 
@@ -30,7 +25,7 @@ describe('Template.welcome', function() {
 
     beforeEach(function() {
       Router.go = sinon.spy();
-      subject.configuredEvents['click #start']();
+      FauxMeteor.triggerEvent('welcome', 'click #start');
     });
 
     it("goes to the machine page", function() {

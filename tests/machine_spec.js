@@ -4,13 +4,8 @@ describe('Template.machine', function() {
 
   before(function() {
 
-    Meteor = {};
-    Meteor.isClient = true;
-    Template = {};
-    Template.machine = {};
-    Template.machine.events = function(events) {
-      this.configuredEvents = events;
-    };
+    FauxMeteor.initAsClient();
+    FauxMeteor.addTemplate('machine');
 
     VendingMachine = {};
 
