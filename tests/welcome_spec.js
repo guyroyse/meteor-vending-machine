@@ -22,7 +22,7 @@ describe('Template.welcome', function() {
     subject = Template.welcome;
   });
 
-  it("has start button text of 'Start Vending Machine'", function() {
+  it("has start button text of 'Start Vending Machine", function() {
     expect(subject.startButtonText()).to.equal('Start Vending Machine');
   });
 
@@ -40,4 +40,3 @@ describe('Template.welcome', function() {
   });
 
 });
-
